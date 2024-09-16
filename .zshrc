@@ -113,3 +113,21 @@ source $ZSH/oh-my-zsh.sh
 export WECHALLUSER="Skyezon"
 export WECHALLTOKEN="79858-4D5DA-0AB71-FF8BE-48F0F-4140E"
 export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
+
+#virtual machine connect ssh
+alias sshl='ssh 192.168.64.9 -l caelis-linux'
+
+source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+eval "$(zoxide init zsh)"
+alias cd="z"
+
+alias ls="eza --icons=always"
+
+eval "$(fzf --zsh)"
+
+alias cat="bat"
+
+eval "$(thefuck --alias)"
+eval "$(thefuck --alias fk)"
