@@ -110,9 +110,8 @@ source $ZSH/oh-my-zsh.sh
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-export WECHALLUSER="Skyezon"
-export WECHALLTOKEN="79858-4D5DA-0AB71-FF8BE-48F0F-4140E"
 export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
+export PATH=$PATH:/opt/homebrew/bin
 
 #virtual machine connect ssh
 alias sshl='ssh 192.168.64.9 -l caelis-linux'
@@ -131,3 +130,7 @@ alias cat="bat"
 
 eval "$(thefuck --alias)"
 eval "$(thefuck --alias fk)"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

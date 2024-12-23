@@ -1,4 +1,5 @@
 vim.g.mapleader = " "
+vim.g.maplocalleader = ' '
 
 vim.keymap.set("n", "<leader>sh", "<C-w>s")            -- split window horizontal
 vim.keymap.set("n", "<leader>sv", "<C-w>v")            -- split windows vertical

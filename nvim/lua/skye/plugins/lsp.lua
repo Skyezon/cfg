@@ -1,7 +1,6 @@
 local servers = {
     "lua_ls",        --lua
     "rust_analyzer", --rust
-    "eslint",        --old javascript
     "biome",         --new javascript
     "ts_ls",      --typescript & javascript
     "dockerls",      --docker

@@ -1,3 +1,3 @@
 require('grug-far').setup({
-    engine = 'astgrep'
+    engine = 'ripgrep'
 })
