@@ -2,7 +2,7 @@ local servers = {
     "lua_ls",        --lua
     "rust_analyzer", --rust
     "biome",         --new javascript
-    "ts_ls",      --typescript & javascript
+    "ts_ls",         --typescript & javascript
     "dockerls",      --docker
     "gopls",         --go
     "pyright",       -- py
@@ -14,6 +14,7 @@ local servers = {
     "intelephense",  --php
     "omnisharp",     --c#,
     "clangd",        -- c & c++
+    "sonarlint"
 }
 
 require('mason').setup()
@@ -23,7 +24,13 @@ require("mason-lspconfig").setup {
 
 require("lspsaga").setup()
 require('lsp-progress').setup()
-require("lsp_signature").setup()
+require("lsp_signature").setup({
+    hint_enable = true, -- Enable signature hints
+    hint_prefix = "🔶 ", -- Prefix for the hint
+    hint_scheme = "String", -- Scheme for highlighting the hint
+    floating_window = true, -- Display hints in a floating window
+    hi_parameter = "Search" -- Highlight the parameter under the cursor
+})
 
 
 local lspconfig = require("lspconfig")
@@ -74,10 +81,6 @@ cmp.setup({
             -- vim.snippet.expand(args.body) -- For native neovim snippets (Neovim v0.10+)
         end,
     },
-    window = {
-        -- completion = cmp.config.window.bordered(),
-        -- documentation = cmp.config.window.bordered(),
-    },
     mapping = cmp.mapping.preset.insert({
         ['<C-b>'] = cmp.mapping.scroll_docs(-4),
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
@@ -87,11 +90,7 @@ cmp.setup({
     }),
     sources = cmp.config.sources({
         { name = 'nvim_lsp' },
-        -- { name = 'vsnip' },   -- For vsnip users.
-        -- { name = 'luasnip' },   -- For luasnip users.
-        { name = 'ultisnips' }, -- For ultisnips users.
-        -- { name = 'snippy' }, -- For snippy users.
-    }, {
+        { name = 'ultisnips' },
         { name = 'buffer' },
     })
 })
@@ -137,8 +136,23 @@ cmp.setup.cmdline(':', {
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
 for _, lsp in ipairs(servers) do
-    lspconfig[lsp].setup {
-        -- on_attach = my_custom_on_attach,
-        capabilities = capabilities,
-    }
+    if lsp == 'sonarlint' then
+        -- Set up SonarLint
+        -- lspconfig.sonarlint.setup({
+        --     capabilities = capabilities,
+        --     flags = {
+        --         debounce_text_changes = 150,
+        --     },
+        --     filetypes = { "java", "go", "javascript", "typescript", "python", "php", "c#", "html" },
+        --     cmd = {
+        --         vim.fn.stdpath('data') ..
+        --         '/mason/bin/sonarlint-language-server', -- Path to the SonarLint executable installed by Mason
+        --         '-stdio'
+        --     }
+        -- })
+    else
+        lspconfig[lsp].setup {
+            capabilities = capabilities,
+        }
+    end
 end

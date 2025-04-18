@@ -32,11 +32,16 @@ local plugins = {
     {
         -- lsp package manager
         "williamboman/mason.nvim",
-        build = ":MasonUpdate"           -- :MasonUpdate updates registry contents
+        build =
+        ":MasonUpdate"                                                                               -- :MasonUpdate updates registry contents
     },
-    "williamboman/mason-lspconfig.nvim", -- bridge mason with lsp
-    "neovim/nvim-lspconfig",             -- base lsp config
-    "folke/tokyonight.nvim",             -- colorscheme	
+    { "rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" } }, --debugger ui
+    "theHamsta/nvim-dap-virtual-text",
+    "williamboman/mason-lspconfig.nvim",                                                             -- bridge mason with lsp
+    "mfussenegger/nvim-dap",                                                                         -- dap client (entry point to enable debug)
+    "jay-babu/mason-nvim-dap.nvim",                                                                  -- bridge mason and nvim
+    "neovim/nvim-lspconfig",                                                                         -- base lsp config
+    "folke/tokyonight.nvim",                                                                         -- colorscheme	
 
     -- nvim cmp stuff
     'hrsh7th/cmp-nvim-lsp',
@@ -63,13 +68,24 @@ local plugins = {
     'numToStr/Comment.nvim',    -- easier commenting anything
     'mbbill/undotree',          -- better undo stuff
     'windwp/nvim-ts-autotag',
-    'MagicDuck/grug-far.nvim',   -- find and replace workspace
+    'MagicDuck/grug-far.nvim',  -- find and replace workspace
     'ray-x/lsp_signature.nvim', -- shows function param when typing
     'lewis6991/gitsigns.nvim',  -- signs in column and blame
     {
         "mikavilpas/yazi.nvim",
         events = "VeryLazy"
     }, -- file directory
+    {
+        'rcarriga/nvim-notify',
+        config = function()
+            require("notify").setup()
+        end
+    },
+    {
+        "folke/trouble.nvim",
+        opts = {}, -- for default options, refer to the configuration section for custom setup.
+        cmd = "Trouble",
+    }
 }
 
 require("lazy").setup(plugins)

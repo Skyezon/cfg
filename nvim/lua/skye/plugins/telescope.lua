@@ -9,13 +9,19 @@ local function save_before_telescope(prompt_bufnr)
     actions.close(prompt_bufnr)
 end
 
+if vim.fn.exists('g:fzf') == 1 then
+    print("fzf plugin is installed")
+else
+    print("fzf plugin is not installed")
+end
+
 require('telescope').setup {
     extensions = {
         fzf = {
-            fuzzy = true,          -- false will only do exact matching
+            fuzzy = true,                   -- false will only do exact matching
             override_generic_sorter = true, -- override the generic sorter
-            override_file_sorter = true, -- override the file sorter
-            case_mode = "smart_case", -- or "ignore_case" or "respect_case"
+            override_file_sorter = true,    -- override the file sorter
+            case_mode = "smart_case",       -- or "ignore_case" or "respect_case"
             -- the default case_mode is "smart_case"
         }
     },

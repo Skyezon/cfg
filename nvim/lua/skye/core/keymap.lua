@@ -31,10 +31,10 @@ vim.keymap.set('n', '<leader>rp', "<cmd>GrugFar<cr>")
 vim.keymap.set('v', '<leader>rp', "<esc><cmd>lua require('grug-far').with_visual_selection()<cr>")
 --#region lsp
 
-vim.keymap.set('n', '<leader>d', "<cmd>Lspsaga show_line_diagnostics<CR>")
+vim.keymap.set('n', '<leader>dd', '<cmd>Trouble diagnostics toggle<cr>')
 vim.keymap.set('n', '[d', "<cmd>Lspsaga diagnostic_jump_prev<CR>")
 vim.keymap.set('n', ']d', "<cmd>Lspsaga diagnostic_jump_next<CR>")
-vim.keymap.set('n', '<leader>D', "<cmd>Lspsaga show_workspace_diagnostics<CR>")
+vim.keymap.set('n', '<leader>D', '<cmd>Trouble diagnostics toggle<cr>')
 
 -- Diagnostic jump with filters such as only jumping to an error
 vim.keymap.set("n", "[e", function()
